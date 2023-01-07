@@ -12,48 +12,49 @@
 3. Instalar Angular globalmente, con el siguiente comando
 
     ```bash
-    $ npm install -g @angular/cli@v13-lts
+    $ npm install -g @angular/cli
     ```
 
 4. Creación del proyecto, con el siguiente comando
 
     ```bash
-    $ ng new dogtorvet
+    $ ng new dogtorpet
     ```
 
     Seleccionando las siguientes opciones:
     ```
     - Would you like to add Angular routing? Yes
-    - Which stylesheet format would you like to use? SCSS
+    - Which stylesheet format would you like to use? CSS
     ```
 
-5. Acceder a la carpeta nueva llamada dogtorvet
+5. Acceder a la carpeta nueva llamada dogtorpet
 
     ```bash
-    $ cd dogtorvet
+    $ cd dogtorpet
     ```
 
 6. Instalar dependencias del proyecto
 
     ```bash
-    $ ng add mdb-angular-ui-kit
+    $ ng add @ng-bootstrap/ng-bootstrap
     ```
-    Seleccionando las siguientes opciones:
-    ```
-    - Would you like to proceed? Yes
-    - Import all MDB modules? Yes
-    - Set up Roboto Font? No
-    - Set up Angular browser animations? Yes
-    - Set up Font Awesome? Yes
-    - Set up Charts? No
+7. Agregar las hojas de estilo para fuentes en el archivo styles.css:
 
-7. Para levantar el seridor de Angular para desarrollo, ejecutar el siguiente comando desde la carpeta `empleados` del proyecto
+    ```css
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css');
+	@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;700&display=swap');
+
+	body {
+	  font-family: 'Sora', Arial, Helvetica, sans-serif;
+	}
+    ```
+8. Para levantar el seridor de Angular para desarrollo, ejecutar el siguiente comando desde la carpeta `empleados` del proyecto
 
     ```bash
     $ ng serve
     ```
 
-8. Abrir la siguiente url en el browser
+9. Abrir la siguiente url en el browser
     [http://localhost:4200/](http://localhost:4200/)
 
 # Crear componentes en el proyecto
@@ -65,80 +66,84 @@
     ```bash
     $ ng generate component components/login --skip-tests
     ```
+2. Ejecutar el siguiente comanto para crear el componente de una mascota
 
-2. Ejecutar el siguiente comando para crear el componente de catalogo
+   ```bash
+   $ ng generate component components/mascota --skip-tests
+   ```
+3. Ejecutar el siguiente comando para crear el componente de catalogo
 
    ```bash
    $ ng generate component components/catalogo --skip-tests
    ```
 
-3. Ejecutar el siguiente comando para crear el componente de agregar registrto
+4. Ejecutar el siguiente comando para crear el componente de agregar registrto
 
    ```bash
    $ ng generate component components/agregar --skip-tests
    ```
 
-4. Ejecutar el siguiente comando para crear el componente de editar registro (como ves en algunos casos es solo necesario poner la inicial del subcomando)
+5. Ejecutar el siguiente comando para crear el componente de editar registro (como ves en algunos casos es solo necesario poner la inicial del subcomando)
 
    ```bash
    $ ng g c components/editar --skip-tests
    ```
 
-5. Ejecutar el siguiente comando para crear el componente de eliminar registro
+6. Ejecutar el siguiente comando para crear el componente de eliminar registro
 
     ```bash
     $ ng g c components/eliminar --skip-tests
     ```
 
-6. Ejecutar el siguiente comando para crear el modelo de Usuario
+7. Ejecutar el siguiente comando para crear el modelo de Usuario
 
     ```bash
     $ ng g interface models/usuario
     ```
 
-7. Ejecutar el siguiente comando para crear el modelo de Mascota
+8. Ejecutar el siguiente comando para crear el modelo de Mascota
 
     ```bash
     $ ng g interface models/mascota
     ```
 
-8. Ejecutar el siguiente comando para crear el modelo de Tipo
+9. Ejecutar el siguiente comando para crear el modelo de Tipo
 
     ```bash
     $ ng g interface models/tipo
     ```
 
-9. Ejecutar el siguiente comando para crear el modelo de Revision
+10. Ejecutar el siguiente comando para crear el modelo de Revision
 
     ```bash
     $ ng g interface models/revision
      ```
 
-10. Ejecutar el siguiente comando para crear el modelo de Vacuna
+11. Ejecutar el siguiente comando para crear el modelo de Vacuna
 
     ```bash
     $ ng g interface models/vacuna
     ```
 
-11. Ejecutar el siguiente comando para crear el servicio de Mascota
+12. Ejecutar el siguiente comando para crear el servicio de Mascota
 
     ```bash
     $ ng g service services/mascota --skip-tests
     ```
 
-12. Ejecutar el siguiente comando para crear el servicio de Login
+13. Ejecutar el siguiente comando para crear el servicio de Login
 
     ```bash
     $ ng g service services/login --skip-tests
     ```
 
-13. Ejecutar el siguiente comando para crear el servicio de Local
+14. Ejecutar el siguiente comando para crear el servicio de Local
 
     ```bash
     $ ng g service services/local --skip-tests
     ```
 
-14. Agregar las rutas de cada componente en el archivo `app-routing.module.ts`, el cual debe quedar similar a lo siguiente,
+15. Agregar las rutas de cada componente en el archivo `app-routing.module.ts`, el cual debe quedar similar a lo siguiente,
 
     ```typescript
     import { NgModule } from '@angular/core';
@@ -164,18 +169,19 @@
     })
     export class AppRoutingModule { }
     ```
-15. Ejecutar el siguiente comando para crear el filtro de seguridad (guardas)
+16. Ejecutar el siguiente comando para crear el filtro de seguridad (guardas)
 
     ```bash
-    $ ng g guard guards/login --skip-tests
+    $ ng g guard util/login --skip-tests
     ```
     Seleccionando las siguientes opciones con la barra espaciadora y dar enter para finalizar
+    ```bash
     >(*) CanActivate
      ( ) CanActivateChild
      ( ) CanDeactivate
      ( ) CanLoad
-
-16. Modifica las rutas dentro el archivo `app-routing.module.ts`, el cual debe quedar similar a lo siguiente,
+    ```
+17. Modifica las rutas dentro el archivo `app-routing.module.ts`, el cual debe quedar similar a lo siguiente,
 
     ```typescript
     //...
@@ -191,4 +197,21 @@
     ];
 
     //...
+    ```
+18. Ejecutar el siguiente comando para crear el interceptor http para el JWT
+
+    ```bash
+    $ ng g interceptor util/jwt --skip-tests
+    ```
+
+19. Modificar el archivo app.module.ts, después de la sección imports agregar la sección providers:
+
+    ```typescript
+    imports: [
+        //...
+    ],
+    providers: [
+        { provide:HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}
+    ],
+    bootstrap: [AppComponent]
     ```
