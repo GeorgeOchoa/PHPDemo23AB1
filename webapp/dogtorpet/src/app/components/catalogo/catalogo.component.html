@@ -1,1 +1,10 @@
-<p>catalogo works!</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let m of mascotas">
+    <app-mascota [mascota]="m"></app-mascota>
+  </div>
+</div>
+
+<button type="button" routerLink="/nuevo" class="btn btn-success btn-lg rounded-circle shadow position-fixed bottom-0 end-0 mb-4 me-4">
+  <i class="fa-solid fa-plus"></i>
+</button>
+
