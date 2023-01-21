@@ -12,6 +12,7 @@ import { EditarComponent } from './components/editar/editar.component';
 import { EliminarComponent } from './components/eliminar/eliminar.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './util/jwt.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { JwtInterceptor } from './util/jwt.interceptor';
     EliminarComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule

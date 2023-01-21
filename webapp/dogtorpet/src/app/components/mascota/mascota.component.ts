@@ -11,5 +11,15 @@ export class MascotaComponent {
   @Input()
   mascota!: Mascota;
 
+  public editar(): void {
+    // TODO: Implementar lógica para editar una mascota
+    console.log("Editar registro de mascota");
+  }
+
+  public confirmarEliminar( evt:Event ): void {
+    // TODO: Implementar lógica para confirmación
+    console.log("Confirmar eliminación de mascota");
+    evt.stopPropagation();
+  }
 
 }
