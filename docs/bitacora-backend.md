@@ -41,7 +41,7 @@
     ```json
     "autoload": {
         "psr-4": {
-            "utel\\": "src/"
+            "DogtorPET\\Backend\\": "src/"
         }
     }
     ```

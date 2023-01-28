@@ -1,0 +1,25 @@
+{
+    "name": "utel/dogtorpet",
+    "description": "Proyecto backend de DogtorPET",
+    "type": "project",
+    "require": {
+        "slim/slim": "^4.11",
+        "slim/psr7": "^1.6",
+        "tuupola/cors-middleware": "^1.4",
+        "tuupola/slim-jwt-auth": "^3.7",
+        "rbdwllr/psr-jwt": "^2.0",
+        "monolog/monolog": "^2.7"
+    },
+    "license": "GNU GPL (General Public License)",
+    "autoload": {
+        "psr-4": {
+            "DogtorPET\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "atellezf",
+            "email": "alejandro@correo.com"
+        }
+    ]
+}
