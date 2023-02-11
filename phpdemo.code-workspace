@@ -4,11 +4,14 @@
 			"path": "webapp/backend"
 		},
 		{
-			"path": "webapp/dogtorvet"
+			"path": "webapp/dogtorpet"
 		},
 		{
 			"path": "docs"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"phpserver.port": 8080,
+		"phpserver.relativePath": "/home/alejandro/Projects/PHPDemo23AB1/webapp/backend/public"
+	}
 }
