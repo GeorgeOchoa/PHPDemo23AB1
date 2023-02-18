@@ -1,44 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Mascota } from '../models/mascota';
-import { mascotas } from './datos-prueba';
+
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MascotaService {
 
-  // TODO: Implementar URL de conexión con el backend (servidor)
+  private readonly servidor = `${environment.urlServidor}/mascota`;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   public obtener( id:number ): Observable<Mascota> {
-    const result  = mascotas.filter( m => m.id == id );
-    return of( result[0] );
+    return this.http.get<Mascota>(`${this.servidor}/${id}`);
   }
 
   public lista( propietario:string ): Observable<Mascota[]> {
-    const result  = mascotas.filter( m => m.propietario == propietario );
-    return of( result );
+    return this.http.get<Mascota[]>(`${this.servidor}/catalogo/${propietario}`);
   }
 
   public insertar( m:Mascota ): Observable<Mascota> {
-    // TODO: Implementar insertar en el backend
     console.log(`Insertando registro de: ${m.nombre}`);
-    return of( m );
+    return this.http.post<Mascota>(this.servidor, m);
   }
 
   public actualizar( m:Mascota ): Observable<Mascota> {
-    // TODO: Implementar actualizar en el backend
     console.log(`Acualizando registro de: ${m.nombre}`);
-    return of( m );
+    return this.http.put<Mascota>(`${this.servidor}/${m.id}`, m);
   }
 
   public eliminar( m:Mascota ): Observable<Mascota> {
-    // TODO: Implementar eliminar en el backend
     console.log(`Eliminando registro de: ${m.nombre}`);
-    return of( m );
+    return this.http.delete<Mascota>(`${this.servidor}/${m.id}`);
   }
-
 
 }

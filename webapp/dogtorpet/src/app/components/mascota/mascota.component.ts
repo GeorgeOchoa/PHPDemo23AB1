@@ -20,8 +20,7 @@ export class MascotaComponent {
   constructor( private router:Router, private modalSvc:NgbModal) { }
 
   public editar(): void {
-    // TODO: Implementar lógica para editar una mascota
-    console.log("Editar registro de mascota");
+    this.router.navigateByUrl(`/editar/${this.mascota.id}`, { state:{ mascota:this.mascota } });
   }
 
   public confirmarEliminar( evt:Event ): void {

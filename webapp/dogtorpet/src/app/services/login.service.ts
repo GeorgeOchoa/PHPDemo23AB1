@@ -2,25 +2,27 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario';
 import { Observable, of, throwError } from 'rxjs';
-import { usuarios } from './datos-prueba';
+
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Mensaje } from '../models/mensaje';
+import { Token } from '../models/token';
+
+export const USUARIO_ACTUAL = 'usuario-actual';
+export const AUTH_TOKEN = 'token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  // Inyección de la depenencia del Router
-  constructor(private router:Router) { }
+  private readonly servidor = `${environment.urlServidor}/login`;
 
-  public login( usuario:Usuario ): Observable<Usuario> {
-    // TODO: Implementar login a través del backend
-    let usr = usuarios.filter( u => u.username == usuario.username )[0];
-    if( usr && usr.password == usuario.password ) {
-      localStorage.setItem('usuario-actual', usr.username);
-      return of( usr );
-    } else {
-      return throwError( () => new Error('Credenciales incorrectas') );
-    }
+  // Inyección de la depenencia del Router
+  constructor(private router:Router, private http:HttpClient) { }
+
+  public login( usuario:Usuario ): Observable<Token|Mensaje> {
+    return this.http.post<Token|Mensaje>(this.servidor, usuario);
   }
 
   public logout( ): void {
@@ -29,7 +31,7 @@ export class LoginService {
   }
 
   public usuarioActual(): string|null {
-    return localStorage.getItem('usuario-actual');
+    return localStorage.getItem(USUARIO_ACTUAL);
   }
 
   public loggedIn(): boolean {
